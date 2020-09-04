@@ -1,0 +1,80 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<style>#}
+{#    div {#}
+{#        /*就是做个样子==*/#}
+{#    }#}
+{#</style>#}
+{#<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52#}
+{#        src="//music.163.com/outchain/player?type=2&id=167655&auto=1&height=32"></iframe>#}
+{##}
+{#<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450#}
+{#        src="//music.163.com/outchain/player?type=0&id=5102907458&auto=1&height=430"></iframe>#}
+{##}
+{#<iframe id="yinyue" src="./test0.html" width=100% height=100% scrolling="no" frameborder="0" allowtransparency="true"></iframe>#}
+{#<script src="../../collectedstatic/blog/js/singlePage.js?share_layout/test0.html"></script>#}
+{#<script src="http://cdn.jsdelivr.net/gh/aweiu/JsLibs/libs/js/singlePage.js?http://10.167.197.201:8009/test0.html" type="application/javascript"></script>#}
+{#网易云音乐#}
+{#<!-- require APlayer -->#}
+{#<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">#}
+{#<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>#}
+{#<!-- require MetingJS -->#}
+{#<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>#}
+{##}
+{#<meting-js#}
+{#    id="5102907458"#}
+{#	server="netease"#}
+{#	type="playlist"#}
+{#    fixed="true"#}
+{#    autoplay="true"#}
+{#    theme="#2980b9">#}
+{#</meting-js>#}
+{#<div>啦啦啦啦啦</div>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>pjax</title>
+    <meta charset="utf-8">
+</head>
+<body>
+
+  <h1>My Site</h1>
+  <div>
+    Go to <a href="test0.html">第一页</a>.<a href="/">第二页</a>
+  </div>
+  <div id="container">
+  呵呵呵和呵呵
+</div>
+
+<div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+<meting-js
+    id="5102907458"
+	server="netease"
+	type="playlist"
+    fixed="true"
+    autoplay="true"
+    theme="#2980b9">
+</meting-js>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+<script type="text/javascript">
+$(document).pjax('a', '#container')
+</script>
+</html>

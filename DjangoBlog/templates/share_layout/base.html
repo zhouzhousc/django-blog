@@ -1,0 +1,437 @@
+{% load static %}
+{% load cache %}
+{% load compress %}
+
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="zh-CN" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="zh-CN" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="zh-CN" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<!--<![endif]-->
+<head>
+
+    <link rel="shortcut icon" href="{% static 'blog/img/favicon.ico' %}" type="image/x-icon">
+    <meta charset="UTF-8"/>
+    <meta name="baidu-site-verification" content="764jJyAYj9"/>
+    <meta name="viewport" content="width=device-width"/>
+    {#    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">#}
+    {% block header %}
+    {% endblock %}
+    <link rel="profile" href="http://gmpg.org/xfn/11"/>
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'blog/js/html5.js' %}" type="text/javascript"></script>
+    <![endif]-->
+
+    <link rel="alternate" type="application/rss+xml" title="{{ SITE_NAME }} &raquo; Feed"
+          href="/feed"/>
+
+    {% compress css %}
+        <link rel='stylesheet' id='twentytwelve-fonts-css'
+              href='{% static 'blog/fonts/fonts.css' %}'
+              type='text/css' media='all'/>
+        <link rel='stylesheet' id='twentytwelve-style-css' href='{% static 'blog/css/style.css' %}' type='text/css'
+              media='all'/>
+        <link href="{% static 'blog/css/oauth_style.css' %}" rel="stylesheet">
+        {% comment %}<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>{% endcomment %}
+        <!--[if lt IE 9]>
+        <link rel='stylesheet' id='twentytwelve-ie-css'  href='{% static 'blog/css/ie.css' %}' type='text/css' media='all' />
+        <![endif]-->
+        <link rel="stylesheet" href="{% static 'pygments/default.css' %}"/>
+        <link rel="stylesheet" href="{% static 'blog/css/nprogress.css' %}">
+        {% block compress_css %}
+        {% endblock %}
+    {% endcompress %}
+
+
+    <style>
+
+        .imgbox {
+            width: 900px;
+            height: 320px;
+        {#border: 1px solid #ccc;#} margin: 10px auto;
+            padding: 5px;
+
+        }
+
+        .imgbox .inner {
+            width: 900px;
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .imgbox .inner img {
+            width: 900px;
+            height: 320px;
+            vertical-align: top
+        }
+
+        .imgbox ul {
+            width: 1000%;
+            position: absolute;
+            list-style: none;
+            left: 0;
+            top: 0;
+        }
+
+        .imgbox .inner li {
+            float: left;
+
+        }
+
+        .imgbox .inner ol {
+            position: absolute;
+            height: 10px;
+            right: 10px;
+            bottom: 10px;
+            text-align: center;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .imgbox .inner ol li {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            line-height: 10px;
+            background-color: #fff;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 50%;
+
+        }
+
+        .imgbox .inner ol .current {
+            background-color: #FFCCFF;
+        }
+
+        .imgbox #arr {
+            display: none;
+        }
+
+        .imgbox #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #fff;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #000;
+            opacity: 0.5;
+        {#border: 1px solid #fff;#}
+        }
+
+        .imgbox #arr #right {
+            right: 5px;
+            left: auto;
+        }
+
+    </style>
+</head>
+
+<body class="home blog custom-font-enabled"
+      style="background-image:url('{% static 'blog/img/timg.jpg' %}'); background-position: center center;background-repeat:no-repeat;background-attachment:fixed;background-size:100% 100%;-moz-background-size:100% 100%;">
+
+<div id="container">
+{##}
+{#<script color="230,230,250" opacity="0.9" count="500" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.js" type="text/javascript" charset="utf-8">#}
+{##}
+{#</script>#}
+{#<script type="application/javascript" src="{% static 'blog/js/singlePage.js' %}?test.html"></script>#}
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"/>
+<script src="{% static 'live2d-widget-master/autoload.js' %}"></script>
+
+<div id="page" class="hfeed site" style="background-color: rgba(248,248,255,0.9)">
+    <div class="imgbox" id="imgbox">
+        <div class="inner">
+            <!--轮播图-->
+            <ul>
+                <li><a href="#"><img src="{% static 'blog/img/1.jpg' %}" alt=""></a></li>
+                <li><a href="#"><img src="{% static 'blog/img/2.jpg' %}" alt=""></a></li>
+                <li><a href="#"><img src="{% static 'blog/img/3.jpg' %}" alt=""></a></li>
+                <li><a href="#"><img src="{% static 'blog/img/4.jpg' %}" alt=""></a></li>
+                <li><a href="#"><img src="{% static 'blog/img/5.jpg' %}" alt=""></a></li>
+
+            </ul>
+
+            <ol class="bar">
+
+            </ol>
+            <!--左右焦点-->
+            <div id="arr">
+                    <span id="left">
+                        <
+                    </span>
+                <span id="right">
+                        >
+                    </span>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        /**
+         *
+         * @param id  传入元素的id
+         * @returns {HTMLElement | null}  返回标签对象，方便获取元素
+         */
+        function my$(id) {
+            return document.getElementById(id);
+        }
+
+        //获取各元素，方便操作
+        var box = my$("imgbox");
+        var inner = box.children[0];
+        var ulObj = inner.children[0];
+        var list = ulObj.children;
+        var olObj = inner.children[1];
+        var arr = my$("arr");
+        var imgWidth = inner.offsetWidth;
+        var right = my$("right");
+        var pic = 0;
+        //根据li个数，创建小按钮
+        for (var i = 0; i < list.length; i++) {
+            var liObj = document.createElement("li");
+
+            olObj.appendChild(liObj);
+            // liObj.innerText=(i+1);
+            liObj.setAttribute("index", i);
+
+            //为按钮注册mouseover事件
+            liObj.onmouseover = function () {
+                //先清除所有按钮的样式
+
+                for (var j = 0; j < olObj.children.length; j++) {
+                    olObj.children[j].removeAttribute("class");
+                }
+                this.className = "current";
+                pic = this.getAttribute("index");
+                animate(ulObj, -pic * imgWidth);
+            }
+
+        }
+
+
+        //设置ol中第一个li有背景颜色
+        olObj.children[0].className = "current";
+        //克隆一个ul中第一个li,加入到ul中的最后=====克隆
+        ulObj.appendChild(ulObj.children[0].cloneNode(true));
+
+        var timeId = setInterval(onmouseclickHandle, 4000);  //圆点循环速度
+        //左右焦点实现点击切换图片功能
+        box.onmouseover = function () {
+            arr.style.display = "block";
+            clearInterval(timeId);
+        };
+        box.onmouseout = function () {
+            arr.style.display = "none";
+            timeId = setInterval(onmouseclickHandle, 4000); //圆点循环速度
+        };
+
+        right.onclick = onmouseclickHandle;
+
+        function onmouseclickHandle() {
+            //如果pic的值是5,恰巧是ul中li的个数-1的值,此时页面显示第六个图片,而用户会认为这是第一个图,
+            //所以,如果用户再次点击按钮,用户应该看到第二个图片
+            if (pic === list.length - 1) {
+                //如何从第6个图,跳转到第一个图
+                pic = 0;//先设置pic=0
+                ulObj.style.left = 0 + "px";//把ul的位置还原成开始的默认位置
+            }
+            pic++;//立刻设置pic加1,那么此时用户就会看到第二个图片了
+            animate(ulObj, -pic * imgWidth);//pic从0的值加1之后,pic的值是1,然后ul移动出去一个图片
+            //如果pic==5说明,此时显示第6个图(内容是第一张图片),第一个小按钮有颜色,
+            if (pic === list.length - 1) {
+                //第五个按钮颜色干掉
+                olObj.children[olObj.children.length - 1].className = "";
+                //第一个按钮颜色设置上
+                olObj.children[0].className = "current";
+            } else {
+                //干掉所有的小按钮的背景颜色
+                for (var i = 0; i < olObj.children.length; i++) {
+                    olObj.children[i].removeAttribute("class");
+                }
+                olObj.children[pic].className = "current";
+            }
+        }
+
+        left.onclick = function () {
+            if (pic === 0) {
+                pic = list.length - 1;
+                ulObj.style.left = -pic * imgWidth + "px";
+            }
+            pic--;
+            animate(ulObj, -pic * imgWidth);
+            for (var i = 0; i < olObj.children.length; i++) {
+                olObj.children[i].removeAttribute("class");
+            }
+            //当前的pic索引对应的按钮设置颜色
+            olObj.children[pic].className = "current";
+        };
+
+        //设置任意的一个元素,移动到指定的目标位置
+        function animate(element, target) {
+            clearInterval(element.timeId);
+            //定时器的id值存储到对象的一个属性中
+            element.timeId = setInterval(function () {
+                //获取元素的当前的位置,数字类型
+                var current = element.offsetLeft;
+                //每次移动的距离
+                var step = 80;
+                step = current < target ? step : -step;
+                //当前移动到位置
+                current += step;
+                if (Math.abs(current - target) > Math.abs(step)) {
+                    element.style.left = current + "px";
+                } else {
+                    //清理定时器
+                    clearInterval(element.timeId);
+                    //直接到达目标
+                    element.style.left = target + "px";
+                }
+            }, 100);    //图片滚动的速度
+        }
+    </script>
+    <header id="masthead" class="site-header" role="banner">
+
+
+        <hgroup>
+            <h1 class="site-title"><a href="/" title="{{ SITE_NAME }}" rel="home">{{ SITE_NAME }}</a>
+            </h1>
+            <h2 class="site-description">{{ SITE_DESCRIPTION }}</h2>
+        </hgroup>
+
+        {% cache 36000 nav %}
+            {% include 'share_layout/nav.html' %}
+        {% endcache %}
+
+    </header><!-- #masthead -->
+    <div id="main" class="wrapper">
+
+        {% block content %}
+        {% endblock %}
+
+
+        {% block sidebar %}
+        {% endblock %}
+
+
+    </div><!-- #main .wrapper -->
+    {% include 'share_layout/footer.html' %}
+</div><!-- #page -->
+
+{#QQ音乐播放器#}
+{#<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">#}
+{#<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>#}
+{#<div id="aplayer" class="aplayer" data-autoplay="true"  data-id="2325112140" data-server="tencent" data-type="playlist" data-fixed="true" data-listfolded="true" data-order="random" data-theme="#F58EA8"></div>#}
+{#<script src="https://unpkg.com/meting@1.2.0/dist/Meting.min.js"></script>#}
+
+{#夜间模式切换#}
+{#<script src="https://cdn.jsdelivr.net/npm/darkmode-js/lib/darkmode-js.min.js"></script>#}
+{#<script>#}
+{#  new Darkmode().showWidget();#}
+{#</script>#}
+
+
+{#{% include 'share_layout/test.html' %}#}
+{#<script src="{% static 'blog/js/singlePage.js' %}?{% include 'share_layout/test0.html' %}" type="application/javascript"></script>#}
+
+</div>
+{#<iframe id="yinyue" src="http://10.167.197.201:8009/test0.html" width=100% height=100% scrolling="no" frameborder="0"#}
+{#        onload="test()" allowtransparency="true"></iframe>#}
+
+{#<script src="{% static 'blog/js/singlePage.js' %}?test0.html"></script>#}
+
+
+{#<div class="container" id="pjax-container"> Go to <a href="./test.html">test page</a>. </div>#}
+{# <a href="test.html" >t.html</a>#}
+{# <div id="container">呵呵呵呵呵</div>#}
+
+
+{#<script>#}
+
+
+
+{#	// 对所有链接跳转事件绑定pjax容器container#}
+{#	$(document).pjax('a[target!=_blank]', '#pjax-container', {fragment:'#pjax-container', timeout:8000})#}
+{#</script>#}
+
+{#<script>#}
+{#$.pjax({#}
+{#    selector: 'a',#}
+{#    container: '#container', //内容替换的容器#}
+{#    show: 'fade',  //展现的动画，支持默认和fade, 可以自定义动画方式，这里为自定义的function即可。#}
+{#    cache: true,  //是否使用缓存#}
+{#    storage: true,  //是否使用本地存储#}
+{#    titleSuffix: '', //标题后缀#}
+{#    filter: function(){},#}
+{#    callback: function(){}#}
+{# })#}
+{#</script>#}
+
+{#网易云音乐#}
+{#<!-- require APlayer -->#}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+<meting-js
+    id="5102907458"
+	server="netease"
+	type="playlist"
+    fixed="true"
+    autoplay="true"
+    theme="#2980b9">
+</meting-js>
+
+</body>
+<footer>
+    {% compress js %}
+        <script type="text/javascript" src="{% static 'blog/js/jquery-3.1.1.js' %}"></script>
+        <script type="text/javascript" src="{% static 'blog/js/nprogress.js' %}"></script>
+        <script src="{% static 'blog/js/blog.js' %}" type="application/javascript"></script>
+        <script src="{% static 'blog/js/navigation.js' %}" type="application/javascript"></script>
+        <script src="{% static 'blog/js/mouse_click.js' %}" type="application/javascript"></script>
+        {% block compress_js %}
+        {% endblock %}
+    {% endcompress %}
+    {% block footer %}
+    {% endblock %}
+</footer>
+<script>
+    (function () {
+        var W = 750, w = parseInt(window.screen.width), s = w / W, u = navigator.userAgent.toLowerCase(),
+            m = '<meta name="viewport" content="width=' + W + ',';
+        if (/android (\d+\.\d+)/.test(u)) {
+            if (parseFloat(RegExp.$1) > 2.3) m += 'minimum-scale=' + s + ',maximum-scale=' + s + ',';
+        } else {
+            m += 'user-scalable=no,';
+        }
+        m += 'target-densitydpi=device-dpi">';
+        document.write(m);
+    }());
+</script>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+<script type="text/javascript">
+$(document).pjax('a', '#container')
+</script>
+
+</html>
+
