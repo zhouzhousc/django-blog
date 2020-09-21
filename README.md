@@ -3,6 +3,8 @@ www.zhousc.cn     My Blog
 
 相关博客参考：
 
+https://www.lylinux.net/article/2019/8/5/58.html
+
 https://github.com/liangliangyy/DjangoBlog/issues/214
 
 https://aihug.cn/
